@@ -68,6 +68,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     });
   }
 
+  void _clear() {
+    setState(() {
+      _display = "0";
+      _firstNumber = null;
+      _secondNumber = null;
+      _operand = "";
+    });
+  }
+
   Widget _buildButton(String text, {Function()? onPressed}) {
     return Expanded(
       child: InkWell(
@@ -127,6 +136,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           Row(
             children: [
               _buildButton("0", onPressed: () => _numClick("0")),
+              _buildButton("C", onPressed: _clear),
             ],
           ),
           Row(
