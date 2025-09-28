@@ -26,6 +26,8 @@ class CalculatorScreen extends StatefulWidget {
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _display = "0";
+  double? _firstNumber;
+  String _operand = "";
 
   void _numClick(String text) {
     setState(() {
@@ -34,6 +36,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       } else {
         _display += text;
       }
+    });
+  }
+
+  void _operatorClick(String op) {
+    setState(() {
+      _firstNumber = double.tryParse(_display);
+      _operand = op;
+      _display = "0";
     });
   }
 
@@ -98,6 +108,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton("0", onPressed: () => _numClick("0")),
             ],
           ),
+          Row(
+            children: [
+              _buildButton("/", onPressed: () => _operatorClick("/")),
+              _buildButton("*", onPressed: () => _operatorClick("*")),
+              _buildButton("-", onPressed: () => _operatorClick("-")),
+              _buildButton("+", onPressed: () => _operatorClick("+")),
+            ],
+          )
         ],
       ),
     );
