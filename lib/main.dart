@@ -58,7 +58,15 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
           case "+": result = _firstNumber! + _secondNumber!; break;
           case "-": result = _firstNumber! - _secondNumber!; break;
           case "*": result = _firstNumber! * _secondNumber!; break;
-          case "/": result = _firstNumber! / _secondNumber!; break;
+          // case "/": result = _firstNumber! / _secondNumber!; break;
+          case "/":
+            if (_secondNumber == 0) {
+              _display = "Error";
+              return;
+            } else {
+              result = _firstNumber! / _secondNumber!;
+            }
+            break;
         }
         _display = result.toString();
         _firstNumber = null;
