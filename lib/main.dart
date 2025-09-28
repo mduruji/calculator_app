@@ -28,6 +28,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   String _display = "0";
   double? _firstNumber;
   String _operand = "";
+  double? _secondNumber;
 
   void _numClick(String text) {
     setState(() {
@@ -44,6 +45,26 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _firstNumber = double.tryParse(_display);
       _operand = op;
       _display = "0";
+    });
+  }
+
+  void _calculate() {
+    setState(() {
+      _secondNumber = double.tryParse(_display);
+      double result = 0;
+
+      if (_firstNumber != null && _secondNumber != null) {
+        switch (_operand) {
+          case "+": result = _firstNumber! + _secondNumber!; break;
+          case "-": result = _firstNumber! - _secondNumber!; break;
+          case "*": result = _firstNumber! * _secondNumber!; break;
+          case "/": result = _firstNumber! / _secondNumber!; break;
+        }
+        _display = result.toString();
+        _firstNumber = null;
+        _secondNumber = null;
+        _operand = "";
+      }
     });
   }
 
@@ -114,6 +135,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               _buildButton("*", onPressed: () => _operatorClick("*")),
               _buildButton("-", onPressed: () => _operatorClick("-")),
               _buildButton("+", onPressed: () => _operatorClick("+")),
+              _buildButton("=", onPressed: _calculate),
             ],
           )
         ],
