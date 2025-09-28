@@ -27,6 +27,35 @@ class CalculatorScreen extends StatefulWidget {
 class _CalculatorScreenState extends State<CalculatorScreen> {
   String _display = "0";
 
+  void _numClick(String text) {
+    setState(() {
+      if (_display == "0") {
+        _display = text;
+      } else {
+        _display += text;
+      }
+    });
+  }
+
+  Widget _buildButton(String text, {Function()? onPressed}) {
+    return Expanded(
+      child: InkWell(
+        onTap: onPressed,
+        child: Container(
+          margin: const EdgeInsets.all(4),
+          height: 70,
+          color: Colors.grey[300],
+          child: Center(
+            child: Text(
+              text,
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +71,32 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
               ),
             ),
+          ),
+          Row(
+            children: [
+              _buildButton("7", onPressed: () => _numClick("7")),
+              _buildButton("8", onPressed: () => _numClick("8")),
+              _buildButton("9", onPressed: () => _numClick("9")),
+            ],
+          ),
+          Row(
+            children: [
+              _buildButton("4", onPressed: () => _numClick("4")),
+              _buildButton("5", onPressed: () => _numClick("5")),
+              _buildButton("6", onPressed: () => _numClick("6")),
+            ],
+          ),
+          Row(
+            children: [
+              _buildButton("1", onPressed: () => _numClick("1")),
+              _buildButton("2", onPressed: () => _numClick("2")),
+              _buildButton("3", onPressed: () => _numClick("3")),
+            ],
+          ),
+          Row(
+            children: [
+              _buildButton("0", onPressed: () => _numClick("0")),
+            ],
           ),
         ],
       ),
